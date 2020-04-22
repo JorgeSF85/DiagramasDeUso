@@ -1,0 +1,40 @@
+@startuml ejercicio 2
+
+skinparam packageStyle rectangle
+
+
+actor Profesor
+
+actor Alumno
+
+rectangle Aula_Virtual{
+    node Grupo
+    node Curso
+
+    Profesor --> (Administrar Grupo)
+    Profesor --> (Administrar Asignatura)
+    
+
+    (Crear Asignatura) ..> (Asignatura) : include
+    (Administrar Asignatura) ..> (Asignatura) : include
+    (Administrar Asignatura) ..> (Alterar Contenido) : extends
+    (Alterar tareas) ..> (Administrar Asignatura) : extends
+    (Alterar Notas) ..> (Administrar Asignatura) : extends
+    
+    Profesor --> (Alterar Grupos)
+    (Grupo) --> (Curso) 
+    (Alterar Grupos) ..> (Grupo) : include
+    (Administrar Grupo) ..> (Grupo) : include
+    (Creacion Grupo) ..> (Grupo) : extends
+    
+    Alumno -- (Curso)
+    (Alterar Alumno) .. (Administrar Grupo) : extends
+    (Eliminar Alumno) ..> (Administrar Grupo) : extends
+    (Añadir Alumno) ..> (Administrar Grupo) : extends
+    
+    (Curso) ..> (Asignatura) : include
+    (Entregar tareas) ..> (Curso) : extends
+    (Consultar contenido) ..> (Curso) : extemds
+    (Consultar Notas) ..> (Curso) : extends
+}
+@enduml

@@ -1,0 +1,51 @@
+@startuml ejercicio 1
+skinparam packageStyle rectangle
+
+
+(Comprar productos) as (Buy)
+(Venta en internet) as (VI)
+(Elabora productos) as (Produc)
+(Venta en fabrica) as (VF)
+(Recoger beneficios) as (Ben)
+(Venta en tienda) as (VT)
+(Venta de socio a socio) as (VSS)
+(Venta en lotes del stock no deseado) as (Lotes)
+(Retirar productos) as (Recoger)
+(Venta a un precio mayor o igual al de la fábrica) as (VentaNormal)
+
+
+rectangle Participantes{
+
+    actor Socios
+
+    actor Cliente
+   
+    actor Fabrica
+    
+}
+
+Fabrica --  Produc
+Produc <-- VI : extends
+Produc <-- VF : extends
+
+Produc <-- Recoger : extends
+
+Recoger -- Socios
+
+VSS --> Socios : extends
+Socios -- VSS
+VT --> Socios : extends
+
+VentaNormal --> VT : extends
+Lotes --> VT : extends
+
+Cliente -- Buy
+VT --> Buy: extends
+VT --> Buy : extends
+VI --> Buy : extends
+VF --* Ben : include
+VI --* Ben : include
+Ben -- Socios
+
+@enduml
+
