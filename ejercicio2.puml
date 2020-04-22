@@ -1,13 +1,12 @@
-@startuml ejercicio 2
-
+@startuml
 skinparam packageStyle rectangle
-
+rectangle Aula_Virtual{
 
 actor Profesor
 
 actor Alumno
 
-rectangle Aula_Virtual{
+
     node Grupo
     node Curso
 
@@ -18,23 +17,27 @@ rectangle Aula_Virtual{
     (Crear Asignatura) ..> (Asignatura) : include
     (Administrar Asignatura) ..> (Asignatura) : include
     (Administrar Asignatura) ..> (Alterar Contenido) : extends
+  (Alterar Notas) ..> (Administrar Asignatura) : extends
     (Alterar tareas) ..> (Administrar Asignatura) : extends
-    (Alterar Notas) ..> (Administrar Asignatura) : extends
+  
     
     Profesor --> (Alterar Grupos)
     (Grupo) --> (Curso) 
+(Creacion Grupo) ..> (Grupo) : extends
     (Alterar Grupos) ..> (Grupo) : include
     (Administrar Grupo) ..> (Grupo) : include
-    (Creacion Grupo) ..> (Grupo) : extends
+    
     
     Alumno -- (Curso)
     (Alterar Alumno) .. (Administrar Grupo) : extends
+(Entregar tareas) ..> (Curso) : extends
     (Eliminar Alumno) ..> (Administrar Grupo) : extends
+(Consultar Notas) ..> (Curso) : extends
     (Añadir Alumno) ..> (Administrar Grupo) : extends
     
     (Curso) ..> (Asignatura) : include
-    (Entregar tareas) ..> (Curso) : extends
+    
     (Consultar contenido) ..> (Curso) : extemds
-    (Consultar Notas) ..> (Curso) : extends
+    
 }
 @enduml
